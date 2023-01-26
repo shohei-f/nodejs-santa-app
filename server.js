@@ -1,5 +1,4 @@
   // server.js
-  // where your node app starts
 
   // init project
   const express = require('express');
@@ -17,11 +16,11 @@
   setInterval(sendPendingList, 15000);
 
   app.use(bodyParser());
-  app.use(morgan("dev"));
+  app.use(morgan('dev'));
   app.use(router);
   app.use(express.static('public'));
 
-  app.set("view engine", "ejs");
+  app.set('view engine', 'ejs');
 
   app.post('/send', (request, response) => {
 
@@ -61,7 +60,7 @@
       // ------------------
       // get userProfiles.json
       const userprofs = res[1].data;
-      console.log(`userprof:\n ${JSON.stringify(userprofs)}`);
+      console.log(`userprofs:\n ${JSON.stringify(userprofs)}`);
 
       // search user plofile
       const prof = userprofs.filter((row) => row.userUid == user.uid)[0];
@@ -90,6 +89,7 @@
       // -------------------
       // normal termination
       // -------------------
+      // TODO: double submit countermeasures
       notYetSentList.push({
         uid    : user.uid,
         wish   : wish,
@@ -168,25 +168,6 @@
   }
 
   /**
-   * all pending (not yet sent) requests 
-   * @returns requests
-   */
-  function getNotYetSentList() {
-    return [
-      {
-        uid : '730b0412-72c7-11e9-a923-1681be663d3e',
-        wish: 'RC Car',
-        isSent : false
-      },
-      {
-        uid : '730b0804-72c7-11e9-a923-1681be663d3e',
-        wish: 'Teddy Bear',
-        isSent : false
-      },
-    ]
-  }
-
-  /**
    * send PendingList mail
    */
   function sendPendingList() {
@@ -218,6 +199,7 @@
 
         message += `username:${user.username}\naddress:${prof.address}\nwish:${child.wish}\n\n`;
         notYetSentList[index]['isSent'] = true;
+        console.log(notYetSentList);
       });
       console.log(message);
       sendEmail(message);
@@ -228,7 +210,9 @@
 
   /**
    * send email
+   * @param {*} message 
    */
+
   function sendEmail(message) {
 
     const nodemailer = require('nodemailer');
