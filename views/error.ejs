@@ -1,12 +1,3 @@
-<!-- This is a static file -->
-<!-- served from your routes in server.js -->
-
-<!-- You might want to try something fancier: -->
-<!-- html/nunjucks docs: https://mozilla.github.io/nunjucks/ -->
-<!-- pug: https://pugjs.org/ -->
-<!-- haml: http://haml.info/ -->
-<!-- hbs(handlebars): http://handlebarsjs.com/ -->
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -21,28 +12,18 @@
   <!-- import the webpage's stylesheet -->
   <link rel="stylesheet" href="/style.css">
 
-  <!-- import the webpage's client-side javascript file -->
-  <script src="/client.js" defer></script>
 </head>
 
 <body>
   <header>
     <h1>
-      A letter to Santa
+      Error
     </h1>
   </header>
-
   <main>
-    <p class="bold">Ho ho ho, what you want for christma?</p>
-
-    who are you?
-    <input name="userid" placeholder="charlie.brown" />
-    <form method="post">
-      what do you want for christmas?
-      <textarea name="wish" rows="10" cols="45" maxlength="100" placeholder="Gifts!"></textarea>
-      <br/>
-      <button type="submit" id="submit-letter">Send</button>
-    </form>
+    <p class="bold"><%= error_msg %></p>
+    <p class="bold">name: <%= userid %></p>
+    <p class="bold">wish: <%= wish %></p>
   </main>
 
   <footer>
